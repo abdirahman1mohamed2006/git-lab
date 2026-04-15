@@ -1,4 +1,4 @@
 variable "github_repo" {
     type = string
-    default = "git-lab"
+    default = "repo:abdirahman1mohamed2006/git-lab:*"
 }
