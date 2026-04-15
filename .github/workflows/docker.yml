@@ -1,12 +1,17 @@
 name: Deploy to Amazon ECS
 
 on:
-  push:
-    branches: 
-    - main
-    paths:
-     - 'Dockerfile'
-     - 'app/**'
+  workflow_dispatch:
+    inputs:
+      docker_push:
+        description: "Type yes to push the image"
+        required: true
+        type: string
+    
+
+    push:
+     branches:
+       - main
 
 env:
   AWS_REGION: eu-west-1                   # set this to your preferred AWS region, e.g. us-west-1
