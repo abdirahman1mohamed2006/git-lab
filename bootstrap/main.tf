@@ -1,6 +1,4 @@
 
-
-
 terraform {
   required_providers {
     aws = {
@@ -21,10 +19,12 @@ resource "aws_iam_openid_connect_provider" "default" {
   url = "https://token.actions.githubusercontent.com"
 
   client_id_list =["sts.amazonaws.com"] 
+
+  thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1"]
 }
 
-resource "aws_iam_role" "test_role" {
-  name = "test_role"
+resource "aws_iam_role" "test_role_2" {
+  name = "test_role_v2"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -40,7 +40,7 @@ resource "aws_iam_role" "test_role" {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
           }
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:${var.github_repo}:*"
+            "token.actions.githubusercontent.com:sub" = "repo:abdirahman1mohamed2006/git-lab:*"
           }
         }
       }
@@ -73,7 +73,7 @@ resource "aws_iam_policy" "policies-allow" {
 }
 
 resource "aws_iam_role_policy_attachment" "github_actions_attach" {
-  role       = aws_iam_role.test_role.name
+  role       = aws_iam_role.test_role_2.name
   policy_arn = aws_iam_policy.policies-allow.arn
 }
 
